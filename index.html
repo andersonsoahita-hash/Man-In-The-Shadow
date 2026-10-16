@@ -1,756 +1,193 @@
-<title>Man in the Shadow</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Man in the Shadow, livre photographique de Stephen Anderson Soahita. Onze planches parisiennes : un regard discret sur les détails du quotidien.">
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stephen Anderson Soahita, photographe à Paris</title>
+<meta name="description" content="Portfolio de Stephen Anderson Soahita, photographe à Paris : photographie de rue, architecture, Louvre, Notre-Dame, vues aériennes, noir et blanc. Série Man in the Shadow.">
+<meta property="og:title" content="Stephen Anderson Soahita, photographe à Paris">
+<meta property="og:description" content="Photographie de rue et d'architecture à Paris. Série Man in the Shadow.">
+<meta property="og:image" content="img/louvre-01.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap">
 <style>
-/* Concept : une promenade. Le fond change de teinte à chaque planche, comme les pages du livre.
-   Photos au centre, titres condensés et verticaux comme les façades, légendes en italique. */
-@property --bg { syntax: "<color>"; inherits: true; initial-value: #151515; }
-@property --accent { syntax: "<color>"; inherits: true; initial-value: #d8d8d8; }
-
-:root {
-  --bg: #151515;
-  --accent: #d8d8d8;
-  --fg: #ece9e3;
-  --muted: #b8b4ac;
-  --line: rgba(236, 233, 227, 0.16);
-  --display: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue", Impact, sans-serif;
-  --text: "Newsreader", Georgia, "Times New Roman", serif;
-  color-scheme: dark;
-  background: var(--bg);
-  transition: --bg 0.9s ease, --accent 0.9s ease;
-}
-@media (prefers-reduced-motion: reduce) {
-  :root { transition: none; }
-}
-@media (prefers-reduced-motion: no-preference) {
-  :root { scroll-behavior: smooth; }
-}
-
-*, *::before, *::after { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  padding-left: max(20px, env(safe-area-inset-left, 0px));
-  padding-right: max(20px, env(safe-area-inset-right, 0px));
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--text);
-  font-size: 19px;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-}
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0 0 auto;
-  height: env(safe-area-inset-top, 0px);
-  background: var(--bg);
-  z-index: 30;
-}
-
-img { display: block; max-width: 100%; height: auto; }
-a { color: inherit; }
-button { font: inherit; color: inherit; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-::selection { background: var(--accent); color: #111; }
-
-.wrap { max-width: 1180px; margin: 0 auto; }
-
-/* ---------- En-tête ---------- */
-.bar {
-  position: sticky;
-  top: env(safe-area-inset-top, 0px);
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  min-height: 56px;
-  background: var(--bg);
-  border-bottom: 1px solid var(--line);
-}
-@supports (background: color-mix(in srgb, red 50%, transparent)) {
-  .bar { background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-}
-.brand {
-  font-family: var(--display);
-  font-weight: 800;
-  font-size: 20px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  line-height: 1;
-}
-.bar nav { display: flex; gap: 24px; font-style: italic; font-size: 17px; white-space: nowrap; }
-.bar nav a { text-decoration: none; padding: 6px 0; border-bottom: 1px solid transparent; }
-.brand { white-space: nowrap; }
-@media (max-width: 480px) {
-  .brand { font-size: 16px; letter-spacing: 0.03em; }
-  .bar nav { gap: 14px; font-size: 15px; }
-}
-.bar nav a:hover { border-bottom-color: var(--accent); }
-
-/* ---------- Index des planches ---------- */
-.rail { display: none; }
-@media (min-width: 1280px) {
-  .rail {
-    display: block;
-    position: fixed;
-    z-index: 15;
-    left: max(24px, env(safe-area-inset-left, 0px));
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .rail ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
-  .rail a {
-    display: block;
-    padding: 3px 8px 3px 0;
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 0.08em;
-    line-height: 1.2;
-    text-decoration: none;
-    color: var(--muted);
-    opacity: 0.55;
-    border-left: 2px solid transparent;
-    padding-left: 10px;
-    transition: opacity 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-  }
-  .rail a:hover { opacity: 1; }
-  .rail a[aria-current="true"] { opacity: 1; color: var(--accent); border-left-color: var(--accent); }
-}
-
-/* ---------- Couverture ---------- */
-.hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 40px;
-  align-items: center;
-  padding-block: clamp(48px, 8vw, 100px) clamp(56px, 8vw, 110px);
-}
-.hero__text { min-width: 0; }
-.kicker { margin: 0 0 20px; font-style: italic; color: var(--muted); }
-.hero h1 {
-  margin: 0;
-  font-family: var(--display);
-  font-weight: 900;
-  font-size: clamp(64px, 17vw, 128px);
-  line-height: 0.86;
-  letter-spacing: -0.005em;
-  text-transform: uppercase;
-}
-.hero h1 span { display: block; }
-.hero h1 span:nth-child(2) { font-size: 0.5em; line-height: 1.05; letter-spacing: 0.34em; font-weight: 700; color: var(--accent); }
-.tagline { margin: 32px 0 0; max-width: 24ch; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; font-style: italic; text-wrap: balance; }
-.byline { margin: 28px 0 0; color: var(--muted); }
-.byline strong { color: var(--fg); font-family: var(--display); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; font-size: 18px; margin-right: 8px; }
-.cta {
-  display: inline-block;
-  margin-top: 36px;
-  padding: 14px 26px;
-  border: 1px solid var(--fg);
-  font-family: var(--display);
-  font-weight: 800;
-  font-size: 17px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: background-color 0.25s ease, color 0.25s ease;
-}
-.cta:hover { background: var(--fg); color: #111; }
-.hero__img { margin: 0; justify-self: start; max-width: 100%; }
-.hero__img img { width: auto; max-height: 76vh; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.8); }
-@media (min-width: 860px) {
-  .hero { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 64px; }
-  .hero h1 { font-size: clamp(96px, 11vw, 168px); }
-  .hero__img { justify-self: end; }
-}
-
-/* ---------- Manifeste ---------- */
-.seuil { padding-block: clamp(72px, 12vw, 160px) clamp(40px, 6vw, 80px); text-align: center; }
-.seuil .tag, .interlude .tag, .closing .tag { margin: 0 0 28px; font-style: italic; color: var(--muted); }
-.statement {
-  margin: 0 auto;
-  max-width: 17ch;
-  font-family: var(--display);
-  font-weight: 800;
-  font-size: clamp(44px, 8vw, 104px);
-  line-height: 0.98;
-  text-transform: uppercase;
-  text-wrap: balance;
-}
-.statement em { font-style: normal; color: var(--accent); }
-.rule { width: 72px; height: 1px; margin: 40px auto; background: var(--accent); border: 0; }
-.seuil .sub { margin: 0; font-style: italic; font-size: 22px; color: var(--muted); }
-
-.avant {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 40px;
-  align-items: end;
-  padding-block: clamp(40px, 6vw, 80px) clamp(72px, 10vw, 140px);
-}
-.avant__text { min-width: 0; max-width: 34em; }
-.avant__text p { margin: 0 0 1.1em; }
-.avant__text .lede { font-size: 22px; line-height: 1.5; }
-.sign { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--accent); display: inline-block; font-style: italic; color: var(--muted); }
-@media (min-width: 860px) {
-  .avant { grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: 80px; }
-  .avant .figure { justify-self: end; }
-}
-
-/* ---------- Planches ---------- */
-.figure { margin: 0; min-width: 0; }
-.zoom {
-  display: block;
-  padding: 0;
-  border: 0;
-  background: none;
-  cursor: zoom-in;
-  max-width: 100%;
-}
-.zoom img { width: auto; max-width: 100%; max-height: min(86vh, 860px); box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.75); }
-.figcap { margin: 10px 0 0; font-style: italic; font-size: 16px; color: var(--muted); }
-
-.plate {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 32px;
-  align-items: end;
-  padding-block: clamp(64px, 10vw, 140px);
-  scroll-margin-top: 56px;
-}
-.plate__img { min-width: 0; }
-.plate__text { min-width: 0; max-width: 34em; }
-.num { display: flex; align-items: baseline; gap: 16px; margin: 0 0 12px; }
-.roman {
-  font-family: var(--display);
-  font-weight: 900;
-  font-size: clamp(64px, 9vw, 120px);
-  line-height: 0.9;
-  color: var(--accent);
-}
-.loc { font-style: italic; color: var(--muted); }
-.plate h2 {
-  margin: 0;
-  font-family: var(--display);
-  font-weight: 800;
-  font-size: clamp(38px, 5.2vw, 64px);
-  line-height: 0.98;
-  text-transform: uppercase;
-  text-wrap: balance;
-}
-.plate .sub { margin: 18px 0 14px; font-style: italic; font-size: clamp(21px, 2.4vw, 26px); line-height: 1.3; color: var(--accent); text-wrap: balance; }
-.plate p.body { margin: 0 0 1em; color: var(--muted); }
-.plate .cols { display: block; }
-
-@media (min-width: 860px) {
-  .plate { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; }
-  /* A : légende à gauche, photo à droite */
-  .plate--a .plate__text { grid-column: 2 / 7; grid-row: 1; }
-  .plate--a .plate__img  { grid-column: 8 / 13; grid-row: 1; justify-self: end; }
-  /* B : photo à gauche, légende à droite */
-  .plate--b .plate__img  { grid-column: 1 / 7; grid-row: 1; justify-self: start; }
-  .plate--b .plate__text { grid-column: 8 / 13; grid-row: 1; }
-  /* C : photo centrée, légende dessous */
-  .plate--c { row-gap: 44px; }
-  .plate--c .plate__img  { grid-column: 1 / -1; justify-self: center; }
-  .plate--c .plate__text { grid-column: 3 / 11; text-align: center; margin-inline: auto; }
-  .plate--c .num { justify-content: center; }
-  .plate--c .cols { column-count: 2; column-gap: 40px; text-align: left; }
-  .plate--c .cols p { break-inside: avoid; }
-  .plate--c.plate--single .plate__text { max-width: 30em; }
-  /* D : panorama pleine largeur */
-  .plate--d { row-gap: 44px; }
-  .plate--d .plate__img  { grid-column: 1 / -1; }
-  .plate--d .zoom, .plate--d .zoom img { width: 100%; max-height: none; }
-  .plate--d .plate__text { grid-column: 1 / -1; max-width: none; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: start; }
-  .plate--d .plate__head { grid-column: 1 / 7; }
-  .plate--d .plate__copy { grid-column: 8 / 13; padding-top: 12px; }
-}
-@media (max-width: 859px) {
-  .plate--d .zoom, .plate--d .zoom img { width: 100%; max-height: none; }
-  .plate__img { justify-self: start; }
-}
-
-/* ---------- Respiration ---------- */
-.interlude { padding-block: clamp(96px, 16vw, 220px); text-align: center; }
-.interlude .sub, .closing .sub { margin: 0; font-style: italic; font-size: 22px; color: var(--muted); }
-
-/* ---------- Final et contact ---------- */
-.closing { padding-block: clamp(96px, 14vw, 200px) clamp(40px, 6vw, 80px); text-align: center; }
-.closing .statement { font-size: clamp(60px, 11vw, 150px); max-width: 12ch; }
-
-.contact { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; padding-block: clamp(32px, 5vw, 64px) clamp(56px, 8vw, 100px); }
-.contact__img { margin: 0; }
-.contact__img img { width: 100%; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.7); }
-.contact h2 {
-  margin: 0;
-  font-family: var(--display);
-  font-weight: 800;
-  font-size: clamp(36px, 5vw, 58px);
-  letter-spacing: 0.04em;
-  line-height: 1;
-  text-transform: uppercase;
-}
-.contact .role { margin: 8px 0 0; color: var(--muted); }
-.contact .invite { margin: 24px 0 0; font-style: italic; font-size: 22px; max-width: 28em; }
-.links { margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 0 28px; max-width: 640px; }
-.links dt, .links dd { padding: 16px 0; margin: 0; border-top: 1px solid var(--line); display: flex; align-items: center; }
-.links dt { font-style: italic; color: var(--muted); }
-.links dd { gap: 14px; flex-wrap: wrap; min-width: 0; overflow-wrap: anywhere; font-size: 20px; }
-.links a { text-underline-offset: 5px; text-decoration-thickness: 1px; }
-.links a:hover { color: var(--accent); }
-.links dt:last-of-type, .links dd:last-of-type { border-bottom: 1px solid var(--line); }
-.copy {
-  padding: 6px 14px;
-  border: 1px solid var(--line);
-  background: none;
-  cursor: pointer;
-  font-style: italic;
-  font-size: 16px;
-  transition: border-color 0.2s ease, color 0.2s ease;
-}
-.copy:hover { border-color: var(--accent); color: var(--accent); }
-
-.foot { padding-block: 32px calc(48px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px 32px; flex-wrap: wrap; color: var(--muted); font-size: 16px; font-style: italic; }
-
-/* ---------- Visionneuse ---------- */
-.lb[hidden] { display: none; }
-.lb { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
-  padding: calc(56px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(28px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
-  background: rgba(8, 8, 8, 0.97); }
-.lb figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 16px; max-width: 100%; touch-action: pan-y; }
-.lb img { width: auto; max-width: min(92vw, 1100px); max-height: calc(100vh - 190px); max-height: calc(100dvh - 190px); box-shadow: 0 30px 80px -30px #000; }
-.lb figcaption { text-align: center; }
-.lb .t { display: block; font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.1; }
-.lb .s { display: block; margin-top: 4px; font-style: italic; color: var(--muted); }
-.lb-btn {
-  position: absolute;
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  padding: 0;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: rgba(20, 20, 20, 0.7);
-  cursor: pointer;
-  transition: border-color 0.2s ease;
-}
-.lb-btn:hover { border-color: var(--fg); }
-.lb-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.lb-close { top: calc(10px + env(safe-area-inset-top, 0px)); right: max(12px, env(safe-area-inset-right, 0px)); }
-.lb-prev { left: max(12px, env(safe-area-inset-left, 0px)); top: 50%; transform: translateY(-50%); }
-.lb-next { right: max(12px, env(safe-area-inset-right, 0px)); top: 50%; transform: translateY(-50%); }
-.lb-count { position: absolute; top: calc(22px + env(safe-area-inset-top, 0px)); left: max(20px, env(safe-area-inset-left, 0px)); font-family: var(--display); font-weight: 700; letter-spacing: 0.12em; color: var(--muted); }
-@media (max-width: 640px) {
-  .lb-prev, .lb-next { top: auto; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); transform: none; }
-  .lb-prev { left: max(16px, env(safe-area-inset-left, 0px)); }
-  .lb-next { right: max(16px, env(safe-area-inset-right, 0px)); }
-  .lb img { max-height: calc(100vh - 250px); max-height: calc(100dvh - 250px); }
-}
+@property --bg{syntax:"<color>";inherits:true;initial-value:#111}
+@property --accent{syntax:"<color>";inherits:true;initial-value:#d8d8d8}
+:root{--bg:#111;--accent:#d8d8d8;--fg:#ece9e3;--muted:#b3afa7;--line:rgba(236,233,227,.16);
+--display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;--text:"Newsreader",Georgia,serif;
+color-scheme:dark;background:var(--bg);transition:--bg .9s ease,--accent .9s ease}
+@media(prefers-reduced-motion:reduce){:root{transition:none}}
+@media(prefers-reduced-motion:no-preference){:root{scroll-behavior:smooth}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;padding-inline:max(18px,env(safe-area-inset-left,0px)) max(18px,env(safe-area-inset-right,0px));background:var(--bg);color:var(--fg);font:19px/1.65 var(--text);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+::selection{background:var(--accent);color:#111}
+.wrap{max-width:1320px;margin:0 auto}
+.bar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+@supports(background:color-mix(in srgb,red 50%,transparent)){.bar{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}}
+.bar__in{display:flex;align-items:center;gap:20px;min-height:54px}
+.brand{font:800 19px/1 var(--display);letter-spacing:.07em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.cats{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1;font-style:italic;font-size:16px;white-space:nowrap;mask-image:linear-gradient(90deg,#000 92%,transparent)}
+.cats::-webkit-scrollbar{display:none}
+.cats a{text-decoration:none;padding:6px 10px;border-radius:99px;color:var(--muted);transition:color .2s,background .2s}
+.cats a:hover,.cats a[aria-current="true"]{color:var(--fg);background:rgba(255,255,255,.08)}
+.hero{display:grid;gap:32px;align-items:center;padding-block:clamp(36px,7vw,90px) clamp(40px,6vw,80px)}
+@media(min-width:900px){.hero{grid-template-columns:1.05fr .95fr;gap:64px}}
+.kicker{margin:0 0 18px;font-style:italic;color:var(--muted)}
+.hero h1{margin:0;font:900 clamp(58px,10vw,150px)/.88 var(--display);text-transform:uppercase;letter-spacing:-.005em}
+.hero h1 span{display:block}
+.tagline{font-size:clamp(20px,2.2vw,26px);font-style:italic;color:var(--muted);margin:24px 0 8px;max-width:30ch}
+.byline{margin:0 0 30px}.byline strong{font:700 18px var(--display);letter-spacing:.08em;text-transform:uppercase;margin-right:10px}
+.cta{display:inline-block;padding:13px 26px;border:1px solid var(--fg);border-radius:99px;text-decoration:none;font-style:italic;transition:background .2s,color .2s}
+.cta:hover{background:var(--fg);color:#111}
+.hero__img{margin:0;max-height:82vh;display:flex;justify-content:center}
+.hero__img img{max-height:82vh;width:auto;max-width:100%;object-fit:contain;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.intro{max-width:760px;margin:0 auto;padding-block:30px 70px;text-align:center}
+.intro p{font-size:clamp(21px,2.4vw,27px);line-height:1.5;margin:0 0 18px}
+.intro small{color:var(--muted);font-style:italic}
+.cat{padding-block:clamp(50px,8vw,100px);border-top:1px solid var(--line)}
+.cat__head{display:grid;grid-template-columns:auto 1fr;gap:6px 22px;align-items:end;margin-bottom:34px}
+.cat__n{font:800 clamp(40px,6vw,76px)/.9 var(--display);color:var(--accent);opacity:.9}
+.cat__head h2{margin:0;font:900 clamp(34px,5vw,62px)/.95 var(--display);text-transform:uppercase;letter-spacing:.01em}
+.cat__head p{margin:8px 0 0;max-width:56ch;color:var(--muted);font-style:italic}
+.cat__c{grid-column:2;font:700 14px var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+@media(min-width:900px){.cat__head{grid-template-columns:auto 1fr auto}.cat__c{grid-column:auto}}
+.grid{list-style:none;margin:0;padding:0;columns:1;column-gap:14px}
+@media(min-width:620px){.grid{columns:2}}
+@media(min-width:1000px){.grid{columns:3}}
+.ph{break-inside:avoid;margin:0 0 14px}
+.zoom{display:block;width:100%;position:relative;overflow:hidden;background:#000;cursor:zoom-in}
+.zoom img{width:100%;aspect-ratio:var(--ar);transition:transform .6s ease,opacity .4s;opacity:.97}
+.zoom:hover img{transform:scale(1.035);opacity:1}
+.zoom::after{content:attr(data-title);position:absolute;inset:auto 0 0;padding:34px 14px 10px;font:700 15px var(--display);letter-spacing:.12em;text-transform:uppercase;background:linear-gradient(transparent,rgba(0,0,0,.75));opacity:0;transition:opacity .3s;text-align:left;pointer-events:none}
+.zoom:hover::after,.zoom:focus-visible::after{opacity:1}
+@media(hover:none){.zoom::after{display:none}}
+.about{display:grid;gap:32px;padding-block:clamp(50px,8vw,100px);border-top:1px solid var(--line)}
+@media(min-width:900px){.about{grid-template-columns:1fr 1fr;gap:70px}}
+.about h2,.contact h2{margin:0 0 20px;font:900 clamp(34px,5vw,62px)/.95 var(--display);text-transform:uppercase}
+.about p{margin:0 0 16px}.about .lede{font-size:clamp(22px,2.4vw,28px);line-height:1.4}
+.contact{padding-block:clamp(50px,8vw,100px);border-top:1px solid var(--line)}
+.links{display:grid;grid-template-columns:auto 1fr;gap:12px 24px;margin:26px 0 0;max-width:560px}
+.links dt{font:700 15px var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);padding-top:4px}
+.links dd{margin:0;word-break:break-word}
+.links a{text-underline-offset:4px}
+.copy{margin-left:12px;padding:3px 12px;border:1px solid var(--line);border-radius:99px;font-size:15px;font-style:italic}
+.copy:hover{border-color:var(--accent)}
+.foot{display:flex;flex-wrap:wrap;gap:8px 30px;justify-content:space-between;padding-block:28px 40px;border-top:1px solid var(--line);color:var(--muted);font-size:15px;font-style:italic}
+.lb{position:fixed;inset:0;z-index:50;background:rgba(8,8,8,.96);display:flex;align-items:center;justify-content:center;padding:56px 12px 0}
+.lb[hidden]{display:none}
+.lb figure{margin:0;display:flex;flex-direction:column;align-items:center;max-width:100%;max-height:100%}
+.lb img{max-width:min(100%,1500px);max-height:calc(100vh - 150px);max-height:calc(100dvh - 150px);width:auto;height:auto;object-fit:contain}
+.lb figcaption{padding:14px 56px 20px;text-align:center;max-width:760px;line-height:1.45}
+.lb .t{display:block;font:800 22px var(--display);letter-spacing:.1em;text-transform:uppercase}
+.lb .s{display:block;font-style:italic;color:var(--muted);margin-top:2px}
+.lb .x{display:block;font-size:17px;color:var(--muted);margin-top:8px}
+.lb-btn{position:absolute;z-index:2;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08)}
+.lb-btn:hover{background:rgba(255,255,255,.18)}
+.lb-btn svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.lb-close{top:max(10px,env(safe-area-inset-top));right:12px}.lb-prev{left:10px;top:50%}.lb-next{right:10px;top:50%}
+.lb-count{position:absolute;top:max(22px,env(safe-area-inset-top));left:18px;font:700 14px var(--display);letter-spacing:.14em;color:var(--muted)}
+@media(max-width:600px){.lb-prev,.lb-next{top:auto;bottom:10px}.lb figcaption{padding-inline:12px 12px;padding-bottom:70px}}
 </style>
-
-<header class="bar">
-  <a class="brand" href="#top">Man in the Shadow</a>
-  <nav aria-label="Navigation principale">
-    <a href="#planches">Les planches</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
-
-<nav class="rail" aria-label="Aller à une planche">
-  <ol>
-    <li><a href="#planche-1" data-rail="planche-1" aria-label="Planche I">I</a></li>
-    <li><a href="#planche-2" data-rail="planche-2" aria-label="Planche II">II</a></li>
-    <li><a href="#planche-3" data-rail="planche-3" aria-label="Planche III">III</a></li>
-    <li><a href="#planche-4" data-rail="planche-4" aria-label="Planche IV">IV</a></li>
-    <li><a href="#planche-5" data-rail="planche-5" aria-label="Planche V">V</a></li>
-    <li><a href="#planche-6" data-rail="planche-6" aria-label="Planche VI">VI</a></li>
-    <li><a href="#planche-7" data-rail="planche-7" aria-label="Planche VII">VII</a></li>
-    <li><a href="#planche-8" data-rail="planche-8" aria-label="Planche VIII">VIII</a></li>
-    <li><a href="#planche-9" data-rail="planche-9" aria-label="Planche IX">IX</a></li>
-    <li><a href="#planche-10" data-rail="planche-10" aria-label="Planche X">X</a></li>
-    <li><a href="#planche-11" data-rail="planche-11" aria-label="Planche XI">XI</a></li>
-  </ol>
-</nav>
-
-<main class="wrap">
-
-  <section class="hero" id="top" data-bg="#151515" data-accent="#d8d8d8">
-    <div class="hero__text">
-      <p class="kicker">Livre photographique, 2024 / 2025</p>
-      <h1><span>Man</span><span>in the</span><span>Shadow</span></h1>
-      <p class="tagline">Un regard discret sur les détails du quotidien</p>
-      <p class="byline"><strong>Stephen Anderson Soahita</strong> Photographe, Paris</p>
-      <a class="cta" href="#planches">Entrer dans les onze planches</a>
-    </div>
-    <figure class="hero__img">
-      <img src="img/cover.jpg" width="901" height="1202" alt="Deux immeubles vus d'en bas, un couloir de ciel nuageux entre eux, en noir et blanc" fetchpriority="high">
-    </figure>
-  </section>
-
-  <section class="seuil" data-bg="#1b2029" data-accent="#c9b896" aria-labelledby="seuil-t">
-    <p class="tag">Le seuil</p>
-    <h2 class="statement" id="seuil-t">Ce n'est pas le moment que je cherche. <em>C'est ce qu'on ne voit plus.</em></h2>
-    <hr class="rule">
-    <p class="sub">Chaque image est une invitation à regarder deux fois.</p>
-  </section>
-
-  <section class="avant" data-bg="#1b2029" data-accent="#c9b896" aria-labelledby="avant-t">
-    <div class="avant__text">
-      <h2 id="avant-t" class="statement" style="font-size:clamp(34px,4.6vw,56px);max-width:none;text-align:left;margin:0 0 28px">Avant d'entrer</h2>
-      <p class="lede">Je photographie ce qui est là, sous les yeux de tout le monde, et que plus personne ne regarde vraiment.</p>
-      <p>L'escalier qu'on monte sans lever la tête. L'ombre qui raconte plus que la personne qui la projette. Le drapeau qui tient deux mondes dans un même cadre. L'inconnu qui porte un secret sous le bras.</p>
-      <p>Rien de spectaculaire. Juste l'ordinaire, regardé autrement, jusqu'à ce qu'il redevienne remarquable. Onze planches, onze arrêts. Elles se lisent dans l'ordre, comme une promenade.</p>
-      <span class="sign">Stephen Anderson Soahita</span>
-    </div>
-    <figure class="figure">
-      <button class="zoom" type="button" data-title="Avant d'entrer" data-sub="Paris" aria-label="Agrandir la photo : Avant d'entrer">
-        <img src="img/avant.jpg" width="695" height="1043" loading="lazy" alt="Une rue de Paris bordée d'arbres, un coureur au loin sur le passage piéton">
-      </button>
-      <figcaption class="figcap">Paris</figcaption>
-    </figure>
-  </section>
-
-  <div id="planches">
-
-    <article class="plate plate--c plate--single" id="planche-1" data-bg="#1a1a1a" data-accent="#c4c4c4" aria-labelledby="t1">
-      <div class="plate__img">
-        <button class="zoom" type="button" data-title="La ville respire" data-sub="Planche I, Paris" aria-label="Agrandir la planche I : La ville respire">
-          <img src="img/p01-la-ville-respire.jpg" width="914" height="1219" loading="lazy" alt="Deux immeubles vus d'en bas, un couloir de ciel nuageux entre eux, en noir et blanc">
-        </button>
-      </div>
-      <div class="plate__text">
-        <p class="num"><span class="roman">I</span><span class="loc">Paris</span></p>
-        <h2 id="t1">La ville respire</h2>
-        <p class="sub">Je ne photographiais pas les immeubles.</p>
-        <p class="body">Je photographiais ce qu'ils laissaient entre eux. Ce couloir de ciel que personne ne remarque en marchant. La ville ne vit pas seulement au niveau du trottoir, elle respire tout en haut, dans l'espace que le béton oublie de prendre.</p>
-      </div>
-    </article>
-
-    <article class="plate plate--a" id="planche-2" data-bg="#192027" data-accent="#9fbfd4" aria-labelledby="t2">
-      <div class="plate__img">
-        <button class="zoom" type="button" data-title="Parfaite harmonie" data-sub="Planche II, Paris" aria-label="Agrandir la planche II : Parfaite harmonie">
-          <img src="img/p02-parfaite-harmonie.jpg" width="768" height="1153" loading="lazy" alt="Une femme traverse un passage piéton couvert des ombres de branches d'arbres">
-        </button>
-      </div>
-      <div class="plate__text">
-        <p class="num"><span class="roman">II</span><span class="loc">Paris</span></p>
-        <h2 id="t2">Parfaite harmonie</h2>
-        <p class="sub">Elle est entrée dans le cadre et a tout changé.</p>
-        <p class="body">Je cadrais l'ombre des arbres sur l'asphalte. Le dessin était déjà là, complet, sans personne dedans. Puis elle est passée, et sans le savoir elle a épousé exactement le rythme des branches. Une seconde plus tôt ou plus tard, cette image n'existait pas.</p>
-      </div>
-    </article>
-
-    <article class="plate plate--b" id="planche-3" data-bg="#221b15" data-accent="#d8a870" aria-labelledby="t3">
-      <div class="plate__img">
-        <button class="zoom" type="button" data-title="Deux mondes, un cadre" data-sub="Planche III, Champ de Mars" aria-label="Agrandir la planche III : Deux mondes, un cadre">
-          <img src="img/p03-deux-mondes.jpg" width="718" height="1078" loading="lazy" alt="La tour Eiffel et un drapeau marocain accroché à un balcon d'immeuble haussmannien">
-        </button>
-      </div>
-      <div class="plate__text">
-        <p class="num"><span class="roman">III</span><span class="loc">Champ de Mars</span></p>
-        <h2 id="t3">Deux mondes, un cadre</h2>
-        <p class="sub">Paris n'est pas une carte postale.</p>
-        <p class="body">Un drapeau marocain, une tour en fer, la même rue. Personne n'a demandé la permission à personne. C'est cela que je voulais garder : deux histoires qui tiennent debout côte à côte, sans rien avoir à justifier.</p>
-      </div>
-    </article>
-
-    <article class="plate plate--c plate--single" id="planche-4" data-bg="#1e1818" data-accent="#d89494" aria-labelledby="t4">
-      <div class="plate__img">
-        <button class="zoom" type="button" data-title="De travers" data-sub="Planche IV, Paris" aria-label="Agrandir la planche IV : De travers">
-          <img src="img/p04-de-travers.jpg" width="724" height="1087" loading="lazy" alt="Façade parisienne à balcons en noir et blanc, la tour Eiffel à moitié cachée derrière">
-        </button>
-      </div>
-      <div class="plate__text">
-        <p class="num"><span class="roman">IV</span><span class="loc">Paris</span></p>
-        <h2 id="t4">De travers</h2>
-        <p class="sub">Montrer la tour sans vraiment la montrer.</p>
-        <p class="body">Elle est là, à moitié cachée derrière les balcons et les volets. C'est exactement ce qu'elle est pour ceux qui vivent ici : un décor qu'on ne regarde plus. Je l'ai laissée à sa place, au second plan.</p>
-      </div>
-    </article>
-
-    <article class="plate plate--a" id="planche-5" data-bg="#1c2216" data-accent="#bcd68c" aria-labelledby="t5">
-      <div class="plate__img">
-        <button class="zoom" type="button" data-title="Figé dans le vide" data-sub="Planche V, Trocadéro" aria-label="Agrandir la planche V : Figé dans le vide">
-          <img src="img/p05-fige-dans-le-vide.jpg" width="718" height="1078" loading="lazy" alt="Un skateur suspendu en l'air au-dessus de sa planche, devant des marches, des passants en arrière-plan">
-        </button>
-      </div>
-      <div class="plate__text">
-        <p class="num"><span class="roman">V</span><span class="loc">Trocadéro</span></p>
-        <h2 id="t5">Figé dans le vide</h2>
-        <p class="sub">Un saut ne dure que quelques secondes.</p>
-        <p class="body">Ni en l'air, ni au sol. Ce moment tombe entre deux états, et le corps le traverse sans jamais s'y arrêter. J'ai appuyé pile là. C'est tout ce que fait une photographie : elle rend durable ce qui n'aurait dû tenir qu'un battement.</p>
-      </div>
-    </article>
-
-    <section class="interlude" data-bg="#232820" data-accent="#b9c79a" aria-labelledby="resp-t">
-      <p class="tag">Respiration</p>
-      <h2 class="statement" id="resp-t">L'ordinaire n'existe pas. <em>Seulement le regard distrait.</em></h2>
-      <hr class="rule">
-      <p class="sub">Ralentir, c'est déjà voir.</p>
-    </section>
-
-    <article class="plate plate--b" id="planche-6" data-bg="#0f1631" data-accent="#8aa3ff" aria-labelledby="t6">
-      <div class="plate__img">
-        <button class="zoom" type="button" data-title="Le chemin n'est jamais droit" data-sub="Planche VI, Paris" aria-label="Agrandir la planche VI : Le chemin n'est jamais droit">
-          <img src="img/p06-le-chemin.jpg" width="768" height="1153" loading="lazy" alt="Un homme descend un escalier extérieur blanc devant une façade de carreaux bleus">
-        </button>
-      </div>
-      <div class="plate__text">
-        <p class="num"><span class="roman">VI</span><span class="loc">Paris</span></p>
-        <h2 id="t6">Le chemin n'est jamais droit</h2>
-        <p class="sub">C'est la destination qui compte.</p>
-        <p class="body">La façade répète ses volées à l'infini, et il faut monter en zigzag pour arriver quelque part. Aucun trajet utile n'est une ligne droite. Le détour n'est pas du temps perdu, c'est la forme normale du chemin.</p>
-      </div>
-    </article>
-
-    <article class="plate plate--c" id="planche-7" data-bg="#241d16" data-accent="#e2b784" aria-labelledby="t7">
-      <div class="plate__img">
-        <button class="zoom" type="button" data-title="La surprise" data-sub="Planche VII, Trocadéro" aria-label="Agrandir la planche VII : La surprise">
-          <img src="img/p07-la-surprise.jpg" width="742" height="1113" loading="lazy" alt="Un homme souriant porte sous le bras une grande toile peinte représentant un visage">
-        </button>
-      </div>
-      <div class="plate__text">
-        <p class="num"><span class="roman">VII</span><span class="loc">Trocadéro</span></p>
-        <h2 id="t7">La surprise</h2>
-        <p class="sub">Il porte un secret sous le bras.</p>
-        <div class="cols">
-          <p class="body">Colombien, peintre et tatoueur, il traversait la place avec cette toile qu'il a peinte de sa main. Nous avons parlé quelques minutes, le temps qu'il me raconte.</p>
-          <p class="body">Il la rapporte en Colombie. Sa mère ignore encore qu'il a ce talent. Il veut le lui montrer chez elle, au bon moment, en posant la toile devant elle. Ce sourire appartient à un secret qui attend son jour.</p>
-        </div>
-      </div>
-    </article>
-
-    <article class="plate plate--a" id="planche-8" data-bg="#12222b" data-accent="#85c8da" aria-labelledby="t8">
-      <div class="plate__img">
-        <button class="zoom" type="button" data-title="L'élégance ne s'annonce pas" data-sub="Planche VIII, Île-de-France" aria-label="Agrandir la planche VIII : L'élégance ne s'annonce pas">
-          <img src="img/p08-elegance.jpg" width="718" height="1078" loading="lazy" alt="Un homme vu de dos, chapeau de paille et chemise à motifs, marche sur une place ensoleillée">
-        </button>
-      </div>
-      <div class="plate__text">
-        <p class="num"><span class="roman">VIII</span><span class="loc">Île-de-France</span></p>
-        <h2 id="t8">L'élégance ne s'annonce pas</h2>
-        <p class="sub">Je n'ai pas voulu son visage.</p>
-        <p class="body">Le dos suffisait : la démarche, le chapeau, la coupe du tissu, la façon de tenir le bras. On croit que l'élégance se met en scène. Elle se laisse surtout deviner de dos, quand la personne ne joue plus rien.</p>
-      </div>
-    </article>
-
-    <article class="plate plate--d" id="planche-9" data-bg="#1d2019" data-accent="#c8d39c" aria-labelledby="t9">
-      <div class="plate__img">
-        <button class="zoom" type="button" data-title="En passant" data-sub="Planche IX, Paris" aria-label="Agrandir la planche IX : En passant">
-          <img src="img/p09-en-passant.jpg" width="1115" height="743" loading="lazy" alt="Une rue étroite entre deux murs clairs, une silhouette en orange remonte le trottoir">
-        </button>
-      </div>
-      <div class="plate__text">
-        <div class="plate__head">
-          <p class="num"><span class="roman">IX</span><span class="loc">Paris</span></p>
-          <h2 id="t9">En passant</h2>
-          <p class="sub">Certaines images ne demandent pas qu'on s'arrête longtemps.</p>
-        </div>
-        <div class="plate__copy">
-          <p class="body">Une rue étroite qui descend entre deux murs clairs, une silhouette qui remonte le trottoir sans savoir qu'elle est photographiée.</p>
-          <p class="body">Rien à décoder ici. Juste une respiration dans le carnet, un fragment de ville gardé pour ce qu'il est : une lumière, une pente, un passage.</p>
-        </div>
-      </div>
-    </article>
-
-    <article class="plate plate--b" id="planche-10" data-bg="#14231a" data-accent="#a8d86c" aria-labelledby="t10">
-      <div class="plate__img">
-        <button class="zoom" type="button" data-title="Prendre le temps" data-sub="Planche X, Paris" aria-label="Agrandir la planche X : Prendre le temps">
-          <img src="img/p10-prendre-le-temps.jpg" width="825" height="1237" loading="lazy" alt="Un héron cendré immobile dans l'eau d'un étang, feuillages flous au premier plan">
-        </button>
-      </div>
-      <div class="plate__text">
-        <p class="num"><span class="roman">X</span><span class="loc">Paris</span></p>
-        <h2 id="t10">Prendre le temps</h2>
-        <p class="sub">Il ne se pressait pas. Moi non plus, ce jour-là.</p>
-        <p class="body">Un héron cendré, immobile, au milieu d'une ville qui court. Il attendait sans impatience, comme si le temps ne s'appliquait pas à lui. Dans un monde où tout va vite, s'arrêter pour observer reste sans doute le geste le plus précieux qui nous reste.</p>
-      </div>
-    </article>
-
-    <article class="plate plate--c plate--single" id="planche-11" data-bg="#221d15" data-accent="#e2bc76" aria-labelledby="t11">
-      <div class="plate__img">
-        <button class="zoom" type="button" data-title="Son moment à elle" data-sub="Planche XI, Le Remontalou, Paris" aria-label="Agrandir la planche XI : Son moment à elle">
-          <img src="img/p11-son-moment.jpg" width="900" height="900" loading="lazy" alt="Une femme seule à la terrasse du café Le Remontalou, chaises vides au premier plan">
-        </button>
-      </div>
-      <div class="plate__text">
-        <p class="num"><span class="roman">XI</span><span class="loc">Le Remontalou, Paris</span></p>
-        <h2 id="t11">Son moment à elle</h2>
-        <p class="sub">Seule par choix, jamais par manque.</p>
-        <p class="body">Toutes les chaises sont vides autour d'elle, et ce n'est pas triste. Prendre un café sans personne, c'est savoir se suffire un instant. Chacun a besoin de ce silence là, un moment qui n'appartient à personne d'autre.</p>
-      </div>
-    </article>
-
-  </div>
-
-  <section class="closing" data-bg="#1b2029" data-accent="#c9b896" aria-labelledby="fin-t">
-    <p class="tag">Pour continuer</p>
-    <h2 class="statement" id="fin-t">Regarder autrement.</h2>
-    <hr class="rule">
-    <p class="sub">C'est tout ce que je propose.</p>
-  </section>
-
-  <section class="contact" id="contact" data-bg="#1b2029" data-accent="#c9b896" aria-labelledby="contact-t">
-    <figure class="contact__img">
-      <img src="img/contact.jpg" width="1090" height="726" loading="lazy" alt="Façades haussmanniennes ocre et feuillages d'automne à Paris">
-    </figure>
-    <div>
-      <h2 id="contact-t">Stephen Anderson Soahita</h2>
-      <p class="role">Photographe, Paris</p>
-      <p class="invite">Pour une commande, une collaboration ou simplement pour parler photographie.</p>
-      <dl class="links">
-        <dt>Email</dt>
-        <dd>
-          <a href="mailto:andersonsoahita@gmail.com" id="email">andersonsoahita@gmail.com</a>
-          <button class="copy" type="button" id="copy-email">Copier</button>
-        </dd>
-        <dt>Instagram</dt>
-        <dd><a href="https://www.instagram.com/man.in_the_shadow" target="_blank" rel="noopener">@man.in_the_shadow</a></dd>
-        <dt>TikTok</dt>
-        <dd><a href="https://www.tiktok.com/@the.man.in.theshadow" target="_blank" rel="noopener">@the.man.in.theshadow</a></dd>
-      </dl>
-    </div>
-  </section>
-
-  <footer class="foot">
-    <span>Un regard discret sur les détails du quotidien</span>
-    <span>© Stephen Anderson Soahita, 2024 / 2025</span>
-  </footer>
-</main>
-
-<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Visionneuse de photos" hidden>
-  <span class="lb-count" id="lb-count" aria-hidden="true"></span>
-  <button class="lb-btn lb-close" type="button" id="lb-close" aria-label="Fermer">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
-  </button>
-  <button class="lb-btn lb-prev" type="button" id="lb-prev" aria-label="Photo précédente">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4l-8 8 8 8"/></svg>
-  </button>
-  <figure id="lb-fig">
-    <img id="lb-img" src="" alt="">
-    <figcaption><span class="t" id="lb-t"></span><span class="s" id="lb-s"></span></figcaption>
-  </figure>
-  <button class="lb-btn lb-next" type="button" id="lb-next" aria-label="Photo suivante">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg>
-  </button>
+</head>
+<body>
+<header class="bar"><div class="wrap bar__in"><a class="brand" href="#top">Stephen A. Soahita</a><nav class="cats" aria-label="Séries"><a href="#serie">Man in the Shadow</a><a href="#louvre">Louvre</a><a href="#notre-dame">Notre-Dame</a><a href="#monuments">Monuments et horloges</a><a href="#voitures">Voitures de collection</a><a href="#nature">Nature et animaux</a><a href="#facades">Façades colorées</a><a href="#rues">Rues et architecture</a><a href="#passants">Gens de passage</a><a href="#arc">Vu de l&#x27;Arc de Triomphe</a><a href="#eiffel">Vu de la tour Eiffel</a><a href="#regards">Regards sur la tour</a><a href="#noir-blanc">Noir et blanc</a><a href="#a-propos">À propos</a><a href="#contact">Contact</a></nav></div></header>
+<main class="wrap" id="top">
+<section class="hero" data-bg="#0e1620" data-accent="#8fc1e6">
+<div>
+<p class="kicker">Photographe · Paris</p>
+<h1><span>Stephen</span><span>Anderson</span><span>Soahita</span></h1>
+<p class="tagline">Je photographie ce qu'on ne regarde plus.</p>
+<p class="byline"><strong>104 photos</strong>13 séries</p>
+<a class="cta" href="#serie">Entrer dans le portfolio</a>
 </div>
-
+<figure class="hero__img"><img src="img/louvre-01.jpg" width="1500" height="2000" alt="Deux silhouettes devant la pyramide du Louvre, vue à travers une grande arche" fetchpriority="high"></figure>
+</section>
+<section class="intro"><p>Rues, monuments, reflets, silhouettes. Paris vu de biais, de dos, de haut, et souvent à l'heure où la lumière se retire.</p><small>Cliquez sur une photo pour l'agrandir, puis naviguez avec les flèches.</small></section>
+<section class="cat" id="serie" data-bg="#151515" data-accent="#d8d8d8" aria-labelledby="h-serie">
+<header class="cat__head"><span class="cat__n">01</span><div><h2 id="h-serie">Man in the Shadow</h2><p>Ma série de onze photographies. Le quotidien parisien, regardé jusqu&#x27;à ce qu&#x27;il redevienne remarquable. Chaque image porte une phrase : ouvrez-la pour la lire.</p></div><span class="cat__c">11 photos</span></header>
+<ul class="grid"><li class="ph" style="--ar:914/1219"><button type="button" class="zoom" data-full="img/p01-la-ville-respire.jpg" data-title="La ville respire" data-sub="Je ne photographiais pas les immeubles." data-text="Je photographiais ce qu&#x27;ils laissaient entre eux. Ce couloir de ciel que personne ne remarque en marchant."><img src="img/p01-la-ville-respire.jpg" width="914" height="1219" alt="Je ne photographiais pas les immeubles." loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:768/1153"><button type="button" class="zoom" data-full="img/p02-parfaite-harmonie.jpg" data-title="Parfaite harmonie" data-sub="Elle est entrée dans le cadre et a tout changé." data-text="Le dessin des ombres était déjà là, complet, sans personne dedans. Puis elle est passée et a épousé le rythme des branches."><img src="img/p02-parfaite-harmonie.jpg" width="768" height="1153" alt="Elle est entrée dans le cadre et a tout changé." loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:718/1078"><button type="button" class="zoom" data-full="img/p03-deux-mondes.jpg" data-title="Deux mondes, un cadre" data-sub="Paris n&#x27;est pas une carte postale." data-text="Un drapeau marocain, une tour en fer, la même rue. Deux histoires côte à côte."><img src="img/p03-deux-mondes.jpg" width="718" height="1078" alt="Paris n&#x27;est pas une carte postale." loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:724/1087"><button type="button" class="zoom" data-full="img/p04-de-travers.jpg" data-title="De travers" data-sub="Montrer la tour sans vraiment la montrer." data-text="Un décor qu&#x27;on ne regarde plus. Je l&#x27;ai laissée au second plan."><img src="img/p04-de-travers.jpg" width="724" height="1087" alt="Montrer la tour sans vraiment la montrer." loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:718/1078"><button type="button" class="zoom" data-full="img/p05-fige-dans-le-vide.jpg" data-title="Figé dans le vide" data-sub="Un saut ne dure que quelques secondes." data-text="J&#x27;ai appuyé pile là : la photographie rend durable ce qui n&#x27;aurait dû tenir qu&#x27;un battement."><img src="img/p05-fige-dans-le-vide.jpg" width="718" height="1078" alt="Un saut ne dure que quelques secondes." loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:768/1153"><button type="button" class="zoom" data-full="img/p06-le-chemin.jpg" data-title="Le chemin n&#x27;est jamais droit" data-sub="C&#x27;est la destination qui compte." data-text="Le détour n&#x27;est pas du temps perdu, c&#x27;est la forme normale du chemin."><img src="img/p06-le-chemin.jpg" width="768" height="1153" alt="C&#x27;est la destination qui compte." loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:742/1113"><button type="button" class="zoom" data-full="img/p07-la-surprise.jpg" data-title="La surprise" data-sub="Il porte un secret sous le bras." data-text="Peintre et tatoueur colombien, il rapporte à sa mère une toile qu&#x27;elle ne savait pas qu&#x27;il pouvait peindre."><img src="img/p07-la-surprise.jpg" width="742" height="1113" alt="Il porte un secret sous le bras." loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:718/1078"><button type="button" class="zoom" data-full="img/p08-elegance.jpg" data-title="L&#x27;élégance ne s&#x27;annonce pas" data-sub="Je n&#x27;ai pas voulu son visage." data-text="Le dos suffisait : la démarche, le chapeau, la coupe du tissu."><img src="img/p08-elegance.jpg" width="718" height="1078" alt="Je n&#x27;ai pas voulu son visage." loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1115/743"><button type="button" class="zoom" data-full="img/p09-en-passant.jpg" data-title="En passant" data-sub="Certaines images ne demandent pas qu&#x27;on s&#x27;arrête longtemps." data-text="Une lumière, une pente, un passage."><img src="img/p09-en-passant.jpg" width="1115" height="743" alt="Certaines images ne demandent pas qu&#x27;on s&#x27;arrête longtemps." loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:825/1237"><button type="button" class="zoom" data-full="img/p10-prendre-le-temps.jpg" data-title="Prendre le temps" data-sub="Il ne se pressait pas. Moi non plus, ce jour-là." data-text="Un héron cendré, immobile, au milieu d&#x27;une ville qui court."><img src="img/p10-prendre-le-temps.jpg" width="825" height="1237" alt="Il ne se pressait pas. Moi non plus, ce jour-là." loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:900/900"><button type="button" class="zoom" data-full="img/p11-son-moment.jpg" data-title="Son moment à elle" data-sub="Seule par choix, jamais par manque." data-text="Toutes les chaises sont vides autour d&#x27;elle, et ce n&#x27;est pas triste."><img src="img/p11-son-moment.jpg" width="900" height="900" alt="Seule par choix, jamais par manque." loading="lazy" decoding="async"></button></li></ul></section>
+<section class="cat" id="louvre" data-bg="#0e1620" data-accent="#8fc1e6" aria-labelledby="h-louvre">
+<header class="cat__head"><span class="cat__n">02</span><div><h2 id="h-louvre">Louvre</h2><p>Des silhouettes dans la lumière froide du verre. J&#x27;attends que quelqu&#x27;un traverse l&#x27;arche.</p></div><span class="cat__c">6 photos</span></header>
+<ul class="grid"><li class="ph" style="--ar:666/1000"><button type="button" class="zoom" data-full="img/louvre-01.jpg" data-title="Deux silhouettes" data-sub="" data-text=""><img src="img/t/louvre-01.jpg" width="666" height="1000" alt="Deux silhouettes devant la pyramide du Louvre, vue à travers une grande arche" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/louvre-02.jpg" data-title="Seule dans l&#x27;arche" data-sub="" data-text=""><img src="img/t/louvre-02.jpg" width="1000" height="667" alt="Une silhouette accroupie devant l&#x27;arche vitrée de la pyramide" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:562/1000"><button type="button" class="zoom" data-full="img/louvre-03.jpg" data-title="Reflet" data-sub="" data-text=""><img src="img/t/louvre-03.jpg" width="562" height="1000" alt="Une silhouette et son reflet dans une arche en miroir, face à la pyramide" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/louvre-04.jpg" data-title="Galerie dorée" data-sub="" data-text=""><img src="img/t/louvre-04.jpg" width="667" height="1000" alt="Une galerie voûtée éclairée en jaune, un passant au bout vers la pyramide" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/louvre-05.jpg" data-title="Cadre dans le cadre" data-sub="" data-text=""><img src="img/t/louvre-05.jpg" width="1000" height="667" alt="La pyramide du Louvre encadrée par l&#x27;arc du Carrousel" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/louvre-06.jpg" data-title="La pyramide et les nuages" data-sub="" data-text=""><img src="img/t/louvre-06.jpg" width="667" height="1000" alt="La pyramide du Louvre sous un ciel de petits nuages" loading="lazy" decoding="async"></button></li></ul></section>
+<section class="cat" id="notre-dame" data-bg="#1a1d2a" data-accent="#9fb4e8" aria-labelledby="h-notre-dame">
+<header class="cat__head"><span class="cat__n">03</span><div><h2 id="h-notre-dame">Notre-Dame</h2><p>La pierre, le vitrail, les feuilles qui s&#x27;invitent dans le cadre.</p></div><span class="cat__c">5 photos</span></header>
+<ul class="grid"><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/notre-dame-01.jpg" data-title="La rosace" data-sub="" data-text=""><img src="img/t/notre-dame-01.jpg" width="1000" height="667" alt="La rosace de Notre-Dame et ses statues" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/notre-dame-02.jpg" data-title="Dentelle de pierre" data-sub="" data-text=""><img src="img/t/notre-dame-02.jpg" width="667" height="1000" alt="Gros plan sur la rosace de Notre-Dame et ses vitraux bleus" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/notre-dame-03.jpg" data-title="Sous les feuilles" data-sub="" data-text=""><img src="img/t/notre-dame-03.jpg" width="667" height="1000" alt="La façade de Notre-Dame vue à travers les branches" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/notre-dame-04.jpg" data-title="Les deux tours" data-sub="" data-text=""><img src="img/t/notre-dame-04.jpg" width="667" height="1000" alt="Les deux tours de Notre-Dame" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/notre-dame-05.jpg" data-title="Façade" data-sub="" data-text=""><img src="img/t/notre-dame-05.jpg" width="667" height="1000" alt="La façade de Notre-Dame sous un ciel clair" loading="lazy" decoding="async"></button></li></ul></section>
+<section class="cat" id="monuments" data-bg="#1c1a16" data-accent="#d9bf86" aria-labelledby="h-monuments">
+<header class="cat__head"><span class="cat__n">04</span><div><h2 id="h-monuments">Monuments et horloges</h2><p>Paris vu de biais : un dôme derrière un feu, un drapeau au-dessus des arbres, un cadran qui continue de tourner.</p></div><span class="cat__c">8 photos</span></header>
+<ul class="grid"><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/monuments-01.jpg" data-title="Sacré-Cœur" data-sub="" data-text=""><img src="img/t/monuments-01.jpg" width="667" height="1000" alt="Le dôme du Sacré-Cœur entre deux immeubles" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/monuments-02.jpg" data-title="La Liberté" data-sub="" data-text=""><img src="img/t/monuments-02.jpg" width="667" height="1000" alt="La statue de la Liberté devant un immeuble de brique rouge" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/monuments-03.jpg" data-title="Le drapeau" data-sub="" data-text=""><img src="img/t/monuments-03.jpg" width="667" height="1000" alt="Un drapeau tricolore au-dessus d&#x27;un clocher et de feuillages" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/monuments-04.jpg" data-title="L&#x27;Institut" data-sub="" data-text=""><img src="img/t/monuments-04.jpg" width="1000" height="667" alt="La coupole de l&#x27;Institut de France" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/monuments-05.jpg" data-title="Panthéon" data-sub="" data-text=""><img src="img/t/monuments-05.jpg" width="667" height="1000" alt="Le dôme du Panthéon et ses lampadaires" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/monuments-06.jpg" data-title="Le cadran" data-sub="" data-text=""><img src="img/t/monuments-06.jpg" width="667" height="1000" alt="Le cadran d&#x27;une tour d&#x27;horloge en pierre" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/monuments-07.jpg" data-title="Gare de Lyon" data-sub="" data-text=""><img src="img/t/monuments-07.jpg" width="667" height="1000" alt="Les cadrans bleus de la tour de la gare de Lyon" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:750/1000"><button type="button" class="zoom" data-full="img/monuments-08.jpg" data-title="La tour" data-sub="" data-text=""><img src="img/t/monuments-08.jpg" width="750" height="1000" alt="Le sommet de la tour de la gare de Lyon et son dôme" loading="lazy" decoding="async"></button></li></ul></section>
+<section class="cat" id="voitures" data-bg="#17202a" data-accent="#e0b574" aria-labelledby="h-voitures">
+<header class="cat__head"><span class="cat__n">05</span><div><h2 id="h-voitures">Voitures de collection</h2><p>Elles roulent encore, et la rue se retourne à leur passage.</p></div><span class="cat__c">4 photos</span></header>
+<ul class="grid"><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/voitures-01.jpg" data-title="Le salut" data-sub="" data-text=""><img src="img/t/voitures-01.jpg" width="1000" height="667" alt="Un conducteur de Méhari bleue fait un signe de la main" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/1000"><button type="button" class="zoom" data-full="img/voitures-02.jpg" data-title="Méhari bleue" data-sub="" data-text=""><img src="img/t/voitures-02.jpg" width="1000" height="1000" alt="Une Citroën Méhari bleue dans une rue pavée" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/750"><button type="button" class="zoom" data-full="img/voitures-03.jpg" data-title="2CV" data-sub="" data-text=""><img src="img/t/voitures-03.jpg" width="1000" height="750" alt="Une 2CV beige vue de trois quarts arrière" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/voitures-04.jpg" data-title="Roadmaster" data-sub="" data-text=""><img src="img/t/voitures-04.jpg" width="1000" height="667" alt="Une Buick Roadmaster blanche décapotable" loading="lazy" decoding="async"></button></li></ul></section>
+<section class="cat" id="nature" data-bg="#10241a" data-accent="#a9d672" aria-labelledby="h-nature">
+<header class="cat__head"><span class="cat__n">06</span><div><h2 id="h-nature">Nature et animaux</h2><p>Au milieu de la ville, il y a toujours quelqu&#x27;un qui n&#x27;est pas pressé.</p></div><span class="cat__c">7 photos</span></header>
+<ul class="grid"><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/nature-01.jpg" data-title="Le ragondin" data-sub="" data-text=""><img src="img/t/nature-01.jpg" width="667" height="1000" alt="Un ragondin traverse un tapis de lentilles d&#x27;eau" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/nature-02.jpg" data-title="Mouette" data-sub="" data-text=""><img src="img/t/nature-02.jpg" width="1000" height="667" alt="Une mouette en vol au ras de l&#x27;eau" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/nature-03.jpg" data-title="Le héron" data-sub="" data-text=""><img src="img/t/nature-03.jpg" width="1000" height="667" alt="Un héron cendré immobile et son reflet" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/nature-04.jpg" data-title="Vol et reflet" data-sub="" data-text=""><img src="img/t/nature-04.jpg" width="1000" height="667" alt="Un héron en vol dessine un cercle avec son reflet" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/nature-05.jpg" data-title="Allée d&#x27;automne" data-sub="" data-text=""><img src="img/t/nature-05.jpg" width="1000" height="667" alt="Une allée sous les arbres aux feuilles dorées" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/nature-06.jpg" data-title="Sous les arbres" data-sub="" data-text=""><img src="img/t/nature-06.jpg" width="667" height="1000" alt="Un chemin de bitume sous une voûte de feuillage" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/nature-07.jpg" data-title="Trace" data-sub="" data-text=""><img src="img/t/nature-07.jpg" width="667" height="1000" alt="Des feuilles en contre-jour et un sillon d&#x27;avion dans le ciel" loading="lazy" decoding="async"></button></li></ul></section>
+<section class="cat" id="facades" data-bg="#1f1a14" data-accent="#f0a53a" aria-labelledby="h-facades">
+<header class="cat__head"><span class="cat__n">07</span><div><h2 id="h-facades">Façades colorées</h2><p>Orange, jaune, bleu nuit : un immeuble qui ressemble à une partition.</p></div><span class="cat__c">5 photos</span></header>
+<ul class="grid"><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/facades-01.jpg" data-title="Partition" data-sub="" data-text=""><img src="img/t/facades-01.jpg" width="1000" height="667" alt="Une façade de bandes orange, jaune et bleues et un panneau de signalisation" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/facades-02.jpg" data-title="Orange et bleu" data-sub="" data-text=""><img src="img/t/facades-02.jpg" width="667" height="1000" alt="Une façade de bandes orange et bleues vue d&#x27;en bas" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/facades-03.jpg" data-title="Escalators" data-sub="" data-text=""><img src="img/t/facades-03.jpg" width="667" height="1000" alt="La façade colorée et ses escalators" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/facades-04.jpg" data-title="Jaune" data-sub="" data-text=""><img src="img/t/facades-04.jpg" width="667" height="1000" alt="Une façade de bandes jaunes et bleu nuit" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/facades-05.jpg" data-title="Courbe" data-sub="" data-text=""><img src="img/t/facades-05.jpg" width="1000" height="667" alt="Une façade colorée et la courbe d&#x27;un escalator" loading="lazy" decoding="async"></button></li></ul></section>
+<section class="cat" id="rues" data-bg="#1b1b1b" data-accent="#cfcfcf" aria-labelledby="h-rues">
+<header class="cat__head"><span class="cat__n">08</span><div><h2 id="h-rues">Rues et architecture</h2><p>Les rues où personne ne s&#x27;arrête. J&#x27;y cherche l&#x27;angle, la perspective, le détail qu&#x27;on oublie.</p></div><span class="cat__c">16 photos</span></header>
+<ul class="grid"><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/rues-01.jpg" data-title="Perspective" data-sub="" data-text=""><img src="img/t/rues-01.jpg" width="667" height="1000" alt="Une avenue vide et des tours au loin" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/rues-02.jpg" data-title="Le couloir" data-sub="" data-text=""><img src="img/t/rues-02.jpg" width="667" height="1000" alt="Un long passage couvert plongé dans l&#x27;ombre" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/rues-03.jpg" data-title="Rue d&#x27;été" data-sub="" data-text=""><img src="img/t/rues-03.jpg" width="667" height="1000" alt="Un immeuble de brique rouge au bout d&#x27;une rue ensoleillée" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/rues-04.jpg" data-title="La pente" data-sub="" data-text=""><img src="img/t/rues-04.jpg" width="667" height="1000" alt="Une rue étroite entre des murs clairs" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/rues-05.jpg" data-title="Le château" data-sub="" data-text=""><img src="img/t/rues-05.jpg" width="1000" height="667" alt="Une grille et un château éclairé au crépuscule" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/673"><button type="button" class="zoom" data-full="img/rues-06.jpg" data-title="L&#x27;allée du château" data-sub="" data-text=""><img src="img/t/rues-06.jpg" width="1000" height="673" alt="Une allée de pelouse menant à un château" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/rues-07.jpg" data-title="Le panneau V9" data-sub="" data-text=""><img src="img/t/rues-07.jpg" width="1000" height="667" alt="Un panneau de signalisation cycliste dans les feuilles" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/rues-08.jpg" data-title="Rue du pressing" data-sub="" data-text=""><img src="img/t/rues-08.jpg" width="667" height="1000" alt="Une rue de Paris encombrée de voitures et de scooters" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/rues-09.jpg" data-title="Le drapeau" data-sub="" data-text=""><img src="img/t/rues-09.jpg" width="667" height="1000" alt="Un drapeau tricolore devant une façade en pierre" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/617"><button type="button" class="zoom" data-full="img/rues-10.jpg" data-title="Le siège" data-sub="" data-text=""><img src="img/t/rues-10.jpg" width="1000" height="617" alt="Un immeuble de bureaux et son logo" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/rues-11.jpg" data-title="Pierre blonde" data-sub="" data-text=""><img src="img/t/rues-11.jpg" width="1000" height="667" alt="Un angle d&#x27;immeuble en pierre sous un ciel bleu" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/rues-12.jpg" data-title="Fenêtres" data-sub="" data-text=""><img src="img/t/rues-12.jpg" width="1000" height="667" alt="Une façade haussmannienne et ses fenêtres alignées" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/rues-13.jpg" data-title="Maison de bois" data-sub="" data-text=""><img src="img/t/rues-13.jpg" width="1000" height="667" alt="Une maison de bois et de zinc entourée d&#x27;arbres" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/rues-14.jpg" data-title="Au-dessus du champ" data-sub="" data-text=""><img src="img/t/rues-14.jpg" width="1000" height="667" alt="Des maisons au-dessus d&#x27;un champ de hautes herbes" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/rues-15.jpg" data-title="Le Minion" data-sub="" data-text=""><img src="img/t/rues-15.jpg" width="1000" height="667" alt="Une botte de paille peinte en Minion dans un champ" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/rues-16.jpg" data-title="Fin de l&#x27;allée" data-sub="" data-text=""><img src="img/t/rues-16.jpg" width="1000" height="667" alt="Une allée d&#x27;arbres automnaux fermée par un camion" loading="lazy" decoding="async"></button></li></ul></section>
+<section class="cat" id="passants" data-bg="#221b15" data-accent="#e2b784" aria-labelledby="h-passants">
+<header class="cat__head"><span class="cat__n">09</span><div><h2 id="h-passants">Gens de passage</h2><p>Je cherche le geste plus que le visage. Un dos, une démarche, une main.</p></div><span class="cat__c">9 photos</span></header>
+<ul class="grid"><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/passants-01.jpg" data-title="Devant le graffiti" data-sub="" data-text=""><img src="img/t/passants-01.jpg" width="1000" height="667" alt="Une passante devant un graffiti coloré sur un rideau métallique" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/passants-02.jpg" data-title="Main dans la main" data-sub="" data-text=""><img src="img/t/passants-02.jpg" width="1000" height="667" alt="Un couple âgé marche main dans la main" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/passants-03.jpg" data-title="L&#x27;agent" data-sub="" data-text=""><img src="img/t/passants-03.jpg" width="667" height="1000" alt="Un agent de dos devant un mur de bois" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/passants-04.jpg" data-title="Le Cristal" data-sub="" data-text=""><img src="img/t/passants-04.jpg" width="1000" height="667" alt="Une femme accoudée devant la terrasse du Cristal" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/passants-05.jpg" data-title="Le béret" data-sub="" data-text=""><img src="img/t/passants-05.jpg" width="1000" height="667" alt="Un homme au béret de dos au bout d&#x27;une rangée de plots" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/passants-06.jpg" data-title="Deux sacs" data-sub="" data-text=""><img src="img/t/passants-06.jpg" width="667" height="1000" alt="Un couple de dos devant un collage en azulejos" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:858/1000"><button type="button" class="zoom" data-full="img/passants-07.jpg" data-title="Sur les pavés" data-sub="" data-text=""><img src="img/t/passants-07.jpg" width="858" height="1000" alt="Un couple marche sur les pavés au bord de la Seine" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/passants-08.jpg" data-title="Terrasse de nuit" data-sub="" data-text=""><img src="img/t/passants-08.jpg" width="1000" height="667" alt="Une terrasse de pizzeria éclairée de nuit" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:734/1000"><button type="button" class="zoom" data-full="img/passants-09.jpg" data-title="La longue-vue" data-sub="" data-text=""><img src="img/t/passants-09.jpg" width="734" height="1000" alt="Un homme de dos, une longue-vue sur l&#x27;épaule" loading="lazy" decoding="async"></button></li></ul></section>
+<section class="cat" id="arc" data-bg="#201a14" data-accent="#d8b27a" aria-labelledby="h-arc">
+<header class="cat__head"><span class="cat__n">10</span><div><h2 id="h-arc">Vu de l&#x27;Arc de Triomphe</h2><p>Douze avenues, une tour au loin, et l&#x27;escalier qui tourne sur lui-même.</p></div><span class="cat__c">6 photos</span></header>
+<ul class="grid"><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/arc-01.jpg" data-title="Panorama" data-sub="" data-text=""><img src="img/t/arc-01.jpg" width="1000" height="667" alt="Paris et la tour Eiffel vus de l&#x27;Arc de Triomphe" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/750"><button type="button" class="zoom" data-full="img/arc-02.jpg" data-title="La Défense" data-sub="" data-text=""><img src="img/t/arc-02.jpg" width="1000" height="750" alt="La Défense au bout de l&#x27;axe historique" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/arc-03.jpg" data-title="La tour" data-sub="" data-text=""><img src="img/t/arc-03.jpg" width="667" height="1000" alt="La tour Eiffel vue de l&#x27;Arc de Triomphe" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/arc-04.jpg" data-title="Contre-jour" data-sub="" data-text=""><img src="img/t/arc-04.jpg" width="667" height="1000" alt="Une avenue vue d&#x27;en haut en contre-jour" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:750/1000"><button type="button" class="zoom" data-full="img/arc-05.jpg" data-title="Les pavés" data-sub="" data-text=""><img src="img/t/arc-05.jpg" width="750" height="1000" alt="Une avenue pavée et ses voitures vues d&#x27;en haut" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/arc-06.jpg" data-title="Colimaçon" data-sub="" data-text=""><img src="img/t/arc-06.jpg" width="1000" height="667" alt="L&#x27;escalier en colimaçon de l&#x27;Arc de Triomphe vu d&#x27;en bas" loading="lazy" decoding="async"></button></li></ul></section>
+<section class="cat" id="eiffel" data-bg="#101a2a" data-accent="#8ab4f0" aria-labelledby="h-eiffel">
+<header class="cat__head"><span class="cat__n">11</span><div><h2 id="h-eiffel">Vu de la tour Eiffel</h2><p>Du crépuscule à la nuit, la Seine, les toits de zinc et un stade où on s&#x27;entraîne.</p></div><span class="cat__c">16 photos</span></header>
+<ul class="grid"><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/eiffel-01.jpg" data-title="La Seine" data-sub="" data-text=""><img src="img/t/eiffel-01.jpg" width="667" height="1000" alt="La Seine et ses ponts vus d&#x27;en haut au crépuscule" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/eiffel-02.jpg" data-title="Bir-Hakeim" data-sub="" data-text=""><img src="img/t/eiffel-02.jpg" width="1000" height="667" alt="Le pont de Bir-Hakeim sur la Seine" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/eiffel-03.jpg" data-title="L&#x27;axe" data-sub="" data-text=""><img src="img/t/eiffel-03.jpg" width="1000" height="667" alt="Une avenue, la Seine et ses ponts" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/eiffel-04.jpg" data-title="Heure bleue" data-sub="" data-text=""><img src="img/t/eiffel-04.jpg" width="1000" height="667" alt="La Seine et ses ponts à l&#x27;heure bleue" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/eiffel-05.jpg" data-title="Dernière lumière" data-sub="" data-text=""><img src="img/t/eiffel-05.jpg" width="1000" height="667" alt="La Seine après le coucher du soleil" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/eiffel-06.jpg" data-title="Bateau illuminé" data-sub="" data-text=""><img src="img/t/eiffel-06.jpg" width="1000" height="667" alt="Un bateau-mouche illuminé sur la Seine de nuit" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/eiffel-07.jpg" data-title="Diamant Bleu" data-sub="" data-text=""><img src="img/t/eiffel-07.jpg" width="1000" height="667" alt="Le Diamant Bleu sur la Seine" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/eiffel-08.jpg" data-title="Fenêtres allumées" data-sub="" data-text=""><img src="img/t/eiffel-08.jpg" width="1000" height="667" alt="Des immeubles aux fenêtres allumées au crépuscule" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/eiffel-09.jpg" data-title="Le stade" data-sub="" data-text=""><img src="img/t/eiffel-09.jpg" width="1000" height="667" alt="Un stade éclairé derrière des toits de zinc" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/eiffel-10.jpg" data-title="Match du soir" data-sub="" data-text=""><img src="img/t/eiffel-10.jpg" width="667" height="1000" alt="Des footballeurs sur un terrain vert et des toits bleutés" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/eiffel-11.jpg" data-title="Toits de zinc" data-sub="" data-text=""><img src="img/t/eiffel-11.jpg" width="1000" height="667" alt="Des toits de zinc bleus, au pied d&#x27;un terrain de sport" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/eiffel-12.jpg" data-title="Le métro aérien" data-sub="" data-text=""><img src="img/t/eiffel-12.jpg" width="1000" height="667" alt="Un métro aérien franchit un carrefour au bord de la Seine" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/eiffel-13.jpg" data-title="Les quais" data-sub="" data-text=""><img src="img/t/eiffel-13.jpg" width="667" height="1000" alt="Des quais bordés de platanes vus d&#x27;en haut" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/eiffel-14.jpg" data-title="Paris doré" data-sub="" data-text=""><img src="img/t/eiffel-14.jpg" width="667" height="1000" alt="Paris sous un ciel bleu, vu de la tour Eiffel" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/eiffel-15.jpg" data-title="Platanes" data-sub="" data-text=""><img src="img/t/eiffel-15.jpg" width="1000" height="667" alt="Un quartier et ses platanes en lumière dorée" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/eiffel-16.jpg" data-title="Les toits" data-sub="" data-text=""><img src="img/t/eiffel-16.jpg" width="1000" height="667" alt="Des toits de zinc et un dôme" loading="lazy" decoding="async"></button></li></ul></section>
+<section class="cat" id="regards" data-bg="#241217" data-accent="#f06ab0" aria-labelledby="h-regards">
+<header class="cat__head"><span class="cat__n">12</span><div><h2 id="h-regards">Regards sur la tour</h2><p>Tout le monde photographie la tour. J&#x27;ai photographié les gens qui la photographient.</p></div><span class="cat__c">7 photos</span></header>
+<ul class="grid"><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/regards-01.jpg" data-title="La tour en rose" data-sub="" data-text=""><img src="img/t/regards-01.jpg" width="667" height="1000" alt="La tour Eiffel illuminée en rose de nuit" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/regards-02.jpg" data-title="Rose" data-sub="" data-text=""><img src="img/t/regards-02.jpg" width="667" height="1000" alt="La tour Eiffel éclairée en rose" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/regards-03.jpg" data-title="Sous l&#x27;arche" data-sub="" data-text=""><img src="img/t/regards-03.jpg" width="667" height="1000" alt="La tour Eiffel illuminée et la foule à son pied" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/1000"><button type="button" class="zoom" data-full="img/regards-04.jpg" data-title="Au crépuscule" data-sub="" data-text=""><img src="img/t/regards-04.jpg" width="1000" height="1000" alt="La tour Eiffel à travers une arche au crépuscule" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/regards-05.jpg" data-title="Deux mains" data-sub="" data-text=""><img src="img/t/regards-05.jpg" width="1000" height="667" alt="Des mains tiennent un téléphone devant la tour" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/1000"><button type="button" class="zoom" data-full="img/regards-06.jpg" data-title="Veste rouge" data-sub="" data-text=""><img src="img/t/regards-06.jpg" width="1000" height="1000" alt="Une femme en veste rouge photographie la tour" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/1000"><button type="button" class="zoom" data-full="img/regards-07.jpg" data-title="L&#x27;écran" data-sub="" data-text=""><img src="img/t/regards-07.jpg" width="1000" height="1000" alt="Un téléphone affiche la tour Eiffel" loading="lazy" decoding="async"></button></li></ul></section>
+<section class="cat" id="noir-blanc" data-bg="#121212" data-accent="#e6e6e6" aria-labelledby="h-noir-blanc">
+<header class="cat__head"><span class="cat__n">13</span><div><h2 id="h-noir-blanc">Noir et blanc</h2><p>Quand la couleur ne sert à rien, il reste les lignes.</p></div><span class="cat__c">4 photos</span></header>
+<ul class="grid"><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/noir-blanc-01.jpg" data-title="L&#x27;escalier" data-sub="" data-text=""><img src="img/t/noir-blanc-01.jpg" width="1000" height="667" alt="Un escalier sous la structure métallique d&#x27;une passerelle" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:667/1000"><button type="button" class="zoom" data-full="img/noir-blanc-02.jpg" data-title="Le V" data-sub="" data-text=""><img src="img/t/noir-blanc-02.jpg" width="667" height="1000" alt="La structure en V d&#x27;une passerelle vue d&#x27;en bas" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/noir-blanc-03.jpg" data-title="Marches" data-sub="" data-text=""><img src="img/t/noir-blanc-03.jpg" width="1000" height="667" alt="Des marches et une rambarde de passerelle" loading="lazy" decoding="async"></button></li><li class="ph" style="--ar:1000/667"><button type="button" class="zoom" data-full="img/noir-blanc-04.jpg" data-title="Façade" data-sub="" data-text=""><img src="img/t/noir-blanc-04.jpg" width="1000" height="667" alt="Une façade de béton aux fenêtres en alvéoles" loading="lazy" decoding="async"></button></li></ul></section>
+<section class="about" id="a-propos" data-bg="#151515" data-accent="#d8d8d8">
+<div><h2>À propos</h2><p class="lede">Je suis photographe à Paris. J'attends qu'un geste, une ombre ou une lumière entre dans le cadre.</p></div>
+<div><p>Mon travail porte sur le quotidien d'une ville que tout le monde croit connaître : ses rues, ses monuments, ses passants que je photographie de dos, plus attentif au geste qu'au visage.</p><p>Le projet Man in the Shadow rassemble onze photographies et leurs histoires. Les autres séries s'enrichissent au fil de mes sorties.</p></div>
+</section>
+<section class="contact" id="contact" data-bg="#151515" data-accent="#d8d8d8">
+<h2>Contact</h2>
+<p>Pour une commande, une collaboration, un tirage ou simplement pour parler photographie.</p>
+<dl class="links"><dt>Email</dt><dd><a href="mailto:andersonsoahita@gmail.com" id="email">andersonsoahita@gmail.com</a><button class="copy" type="button" id="copy-email">Copier</button></dd>
+<dt>Instagram</dt><dd><a href="https://www.instagram.com/man.in_the_shadow" target="_blank" rel="noopener">@man.in_the_shadow</a></dd>
+<dt>TikTok</dt><dd><a href="https://www.tiktok.com/@the.man.in.theshadow" target="_blank" rel="noopener">@the.man.in.theshadow</a></dd></dl>
+</section>
+<footer class="foot"><span>© Stephen Anderson Soahita. Toutes les photos sont protégées, toute reproduction nécessite mon accord.</span><span>Paris</span></footer>
+</main>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Visionneuse de photos" hidden>
+<span class="lb-count" id="lb-count" aria-hidden="true"></span>
+<button class="lb-btn lb-close" type="button" id="lb-close" aria-label="Fermer"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+<button class="lb-btn lb-prev" type="button" id="lb-prev" aria-label="Photo précédente"><svg viewBox="0 0 24 24"><path d="M15 4l-8 8 8 8"/></svg></button>
+<figure><img id="lb-img" src="" alt=""><figcaption><span class="t" id="lb-t"></span><span class="s" id="lb-s"></span><span class="x" id="lb-x"></span></figcaption></figure>
+<button class="lb-btn lb-next" type="button" id="lb-next" aria-label="Photo suivante"><svg viewBox="0 0 24 24"><path d="M9 4l8 8-8 8"/></svg></button>
+</div>
 <script>
-(function () {
-  document.documentElement.lang = "fr";
-  var root = document.documentElement;
-
-  /* Le fond et l'accent suivent la planche au centre de l'écran */
-  var sections = Array.prototype.slice.call(document.querySelectorAll("[data-bg]"));
-  var railLinks = Array.prototype.slice.call(document.querySelectorAll("[data-rail]"));
-  function setRail(id) {
-    railLinks.forEach(function (a) {
-      if (a.getAttribute("data-rail") === id) a.setAttribute("aria-current", "true");
-      else a.removeAttribute("aria-current");
-    });
-  }
-  if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        root.style.setProperty("--bg", e.target.getAttribute("data-bg"));
-        root.style.setProperty("--accent", e.target.getAttribute("data-accent"));
-        setRail(e.target.id && e.target.id.indexOf("planche-") === 0 ? e.target.id : "");
-      });
-    }, { rootMargin: "-50% 0px -50% 0px", threshold: 0 });
-    sections.forEach(function (s) { io.observe(s); });
-  }
-
-  /* Copier l'adresse email */
-  var copyBtn = document.getElementById("copy-email");
-  var emailEl = document.getElementById("email");
-  copyBtn.addEventListener("click", function () {
-    function done(txt) {
-      copyBtn.textContent = txt;
-      setTimeout(function () { copyBtn.textContent = "Copier"; }, 1800);
-    }
-    function selectText() {
-      var r = document.createRange();
-      r.selectNodeContents(emailEl);
-      var s = window.getSelection();
-      s.removeAllRanges();
-      s.addRange(r);
-      done("Adresse sélectionnée");
-    }
-    try {
-      navigator.clipboard.writeText(emailEl.textContent.trim()).then(function () { done("Copié"); }, selectText);
-    } catch (err) { selectText(); }
-  });
-
-  /* Visionneuse */
-  var zooms = Array.prototype.slice.call(document.querySelectorAll(".zoom"));
-  var lb = document.getElementById("lb");
-  var lbImg = document.getElementById("lb-img");
-  var lbT = document.getElementById("lb-t");
-  var lbS = document.getElementById("lb-s");
-  var lbCount = document.getElementById("lb-count");
-  var btnClose = document.getElementById("lb-close");
-  var btnPrev = document.getElementById("lb-prev");
-  var btnNext = document.getElementById("lb-next");
-  var current = 0;
-  var lastFocus = null;
-
-  function show(i) {
-    current = (i + zooms.length) % zooms.length;
-    var z = zooms[current];
-    var img = z.querySelector("img");
-    lbImg.src = img.getAttribute("src");
-    lbImg.alt = img.getAttribute("alt") || "";
-    lbT.textContent = z.getAttribute("data-title") || "";
-    lbS.textContent = z.getAttribute("data-sub") || "";
-    lbCount.textContent = (current + 1) + " / " + zooms.length;
-  }
-  function openLb(i) {
-    lastFocus = document.activeElement;
-    show(i);
-    lb.hidden = false;
-    document.body.style.overflow = "hidden";
-    btnClose.focus();
-  }
-  function closeLb() {
-    lb.hidden = true;
-    document.body.style.overflow = "";
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
-  }
-  zooms.forEach(function (z, i) { z.addEventListener("click", function () { openLb(i); }); });
-  btnClose.addEventListener("click", closeLb);
-  btnPrev.addEventListener("click", function () { show(current - 1); });
-  btnNext.addEventListener("click", function () { show(current + 1); });
-  lb.addEventListener("click", function (e) { if (e.target === lb) closeLb(); });
-  document.addEventListener("keydown", function (e) {
-    if (lb.hidden) return;
-    if (e.key === "Escape") closeLb();
-    else if (e.key === "ArrowLeft") show(current - 1);
-    else if (e.key === "ArrowRight") show(current + 1);
-    else if (e.key === "Tab") {
-      var f = [btnClose, btnPrev, btnNext];
-      var idx = f.indexOf(document.activeElement);
-      e.preventDefault();
-      var next = e.shiftKey ? (idx <= 0 ? f.length - 1 : idx - 1) : (idx + 1) % f.length;
-      f[next].focus();
-    }
-  });
-  var startX = null;
-  var fig = document.getElementById("lb-fig");
-  fig.addEventListener("pointerdown", function (e) { startX = e.clientX; });
-  fig.addEventListener("pointerup", function (e) {
-    if (startX === null) return;
-    var dx = e.clientX - startX;
-    startX = null;
-    if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
-  });
+(function(){
+var root=document.documentElement,secs=[].slice.call(document.querySelectorAll('[data-bg]')),links=[].slice.call(document.querySelectorAll('.cats a'));
+if('IntersectionObserver' in window){
+ var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){var s=en.target;root.style.setProperty('--bg',s.dataset.bg);root.style.setProperty('--accent',s.dataset.accent);
+  links.forEach(function(a){var on=s.id&&a.getAttribute('href')==='#'+s.id;if(on){a.setAttribute('aria-current','true');var c=a.parentNode;c.scrollTo&&c.scrollTo({left:a.offsetLeft-c.clientWidth/2+a.clientWidth/2,behavior:'smooth'})}else a.removeAttribute('aria-current')})}})},{rootMargin:'-45% 0px -45% 0px'});
+ secs.forEach(function(s){io.observe(s)});
+}
+var lb=document.getElementById('lb'),img=document.getElementById('lb-img'),T=document.getElementById('lb-t'),S=document.getElementById('lb-s'),X=document.getElementById('lb-x'),C=document.getElementById('lb-count'),list=[],cur=0,last=null;
+function show(i){cur=(i+list.length)%list.length;var b=list[cur];img.src=b.dataset.full;img.alt=b.querySelector('img').alt;T.textContent=b.dataset.title;S.textContent=b.dataset.sub;X.textContent=b.dataset.text;C.textContent=(cur+1)+' / '+list.length;
+ var n=list[(cur+1)%list.length];if(n){new Image().src=n.dataset.full}}
+function open(b){list=[].slice.call(b.closest('.grid').querySelectorAll('.zoom'));last=b;lb.hidden=false;document.body.style.overflow='hidden';show(list.indexOf(b));document.getElementById('lb-close').focus()}
+function close(){lb.hidden=true;document.body.style.overflow='';img.src='';last&&last.focus()}
+document.addEventListener('click',function(e){var b=e.target.closest('.zoom');if(b){open(b)}});
+document.getElementById('lb-close').onclick=close;document.getElementById('lb-prev').onclick=function(){show(cur-1)};document.getElementById('lb-next').onclick=function(){show(cur+1)};
+lb.addEventListener('click',function(e){if(e.target===lb||e.target.tagName==='FIGURE')close()});
+document.addEventListener('keydown',function(e){if(lb.hidden)return;if(e.key==='Escape')close();else if(e.key==='ArrowLeft')show(cur-1);else if(e.key==='ArrowRight')show(cur+1);
+ else if(e.key==='Tab'){var f=[].slice.call(lb.querySelectorAll('button')),i=f.indexOf(document.activeElement);if(e.shiftKey&&i<=0){e.preventDefault();f[f.length-1].focus()}else if(!e.shiftKey&&i===f.length-1){e.preventDefault();f[0].focus()}}});
+var x0=null;lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});lb.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>50)show(cur+(d<0?1:-1));x0=null});
+var cb=document.getElementById('copy-email');cb.onclick=function(){var m='andersonsoahita@gmail.com';function ok(){cb.textContent='Copié';setTimeout(function(){cb.textContent='Copier'},1800)}
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(m).then(ok,fb)}else fb();function fb(){try{var t=document.createElement('textarea');t.value=m;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);ok()}catch(_){}}};
 })();
 </script>
+</body>
+</html>
