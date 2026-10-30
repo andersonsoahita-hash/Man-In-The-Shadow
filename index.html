@@ -10,7 +10,7 @@
 <meta property="og:image" content="img/gris-02.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Unbounded:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Unbounded:wght@400;500;600&family=UnifrakturMaguntia&display=swap">
 <style>
 :root{--ink:#f4f2ee;--mut:rgba(244,242,238,.66);--line:rgba(244,242,238,.18);--ac:#d8d8d8;
 --wide:"Unbounded","Arial Black",Impact,sans-serif;--body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -30,9 +30,9 @@ a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;paddi
 .burger{width:44px;height:44px;display:grid;place-content:center;gap:7px;justify-self:start;margin-left:-10px}
 .burger i{display:block;width:34px;height:1.5px;background:currentColor;transition:transform .35s var(--ease)}
 body.menu-open .burger i:first-child{transform:translateY(4.2px) rotate(20deg)}body.menu-open .burger i:last-child{transform:translateY(-4.2px) rotate(-20deg)}
-.logo{font:600 clamp(12px,1.4vw,17px)/1 var(--wide);letter-spacing:.26em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.logo{font:400 clamp(22px,2.3vw,30px)/1 'UnifrakturMaguntia',serif;letter-spacing:.01em;text-decoration:none;white-space:nowrap}.sig{font:400 clamp(44px,7vw,96px)/1 'UnifrakturMaguntia',serif}
 .top .contact-l{justify-self:end;text-decoration:none}
-@media(max-width:640px){.top .contact-l{display:none}.top{grid-template-columns:44px 1fr 44px}.logo{text-align:center;letter-spacing:.18em;font-size:11px}}
+@media(max-width:640px){.top .contact-l{display:none}.top{grid-template-columns:44px 1fr 44px}.logo{text-align:center;font-size:20px}}
 /* accueil */
 .hero{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#000}
 .hs{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease;pointer-events:none}
@@ -174,7 +174,7 @@ body.menu-open .menu{visibility:visible;opacity:1;transition:opacity .4s}
 <body>
 <header class="top">
 <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
-<a class="logo" href="#top">Stephen A. Soahita</a>
+<a class="logo" href="#top" aria-label="Stephen Anderson Soahita, accueil">Stephen Anderson Soahita</a>
 <a class="cap contact-l" href="#contact">Contact</a>
 </header>
 <nav class="menu" id="menu" aria-label="Menu principal"><ol id="menu-list"></ol></nav>
